@@ -1,4 +1,5 @@
-import requests, os
+import requests
+import logging, os
 from telegram import ReplyKeyboardMarkup, Bot
 from telegram.ext import CommandHandler, Filters, MessageHandler, Updater
 from dotenv import load_dotenv
@@ -9,6 +10,10 @@ updater = Updater(token=os.getenv('TOKEN'))
 bot = Bot(token=os.getenv('TOKEN'))
 button = ReplyKeyboardMarkup([['/newcat']], resize_keyboard=True)
 URL = 'https://api.thecatapi.com/v1/images/search'
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    level=logging.INFO
+)
 
 def say_hi(update, context):
     chat = update.effective_chat
@@ -18,7 +23,7 @@ def get_new_image():
     try:
         response = requests.get(URL)
     except Exception as error:
-        print(error)      
+        logging.error(f'Ошибка при запросе к основному API: {error}')
         new_url = 'https://api.thedogapi.com/v1/images/search'
         response = requests.get(new_url)
     response = response.json()
