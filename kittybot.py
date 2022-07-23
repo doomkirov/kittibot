@@ -15,7 +15,13 @@ def say_hi(update, context):
     context.bot.send_message(chat_id=chat.id, text='Привет, я KittyBot!')
 
 def get_new_image():
-    response = requests.get(URL).json()
+    try:
+        response = requests.get(URL)
+    except Exception as error:
+        print(error)      
+        new_url = 'https://api.thedogapi.com/v1/images/search'
+        response = requests.get(new_url)
+    response = response.json()
     random_cat = response[0].get('url')
     return random_cat
 
