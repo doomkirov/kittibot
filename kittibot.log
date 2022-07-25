@@ -1,0 +1,3 @@
+2022-07-25 15:59:10,236 - apscheduler.scheduler - INFO - Scheduler started
+2022-07-25 15:59:17,388 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2022-07-25 15:59:17,388 - apscheduler.scheduler - INFO - Scheduler has been shut down
